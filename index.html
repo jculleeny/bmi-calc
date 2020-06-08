@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>BMI Calculator</h1>
+    <form class='form'>
+        <div class="text-input-wrapper">
+            <label for='weight'>Weight in ${weight}</label>
+            <input type='text' name='weight' id='weight'>
+            <label for="height">Height in ${height}</label>
+            <input type="text" name='height' id='height'>
+        </div>
+        <div class="radio-input-wrapper">
+            <input type='radio' name='units' id='imperial' value='imperial'>
+            <label for="units">Imperial</label>
+            <input type="radio" name='units' id='metric' value='metric'>
+            <label for="units">Metric</label>
+        </div>
+    </form>
+    <div class="results-wrapper">
+        <div id="results"><p></p></div>
+    </div>
+    <script src="src/main.js"></script>
+</body>
+</html>
