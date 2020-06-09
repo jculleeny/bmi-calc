@@ -8,6 +8,8 @@
 const form = document.getElementById( 'form' );
 const weight = document.getElementById( 'weight' );
 const height = document.getElementById( 'height' );
+const weightLabel = document.getElementById( 'weight-label' );
+const heightLabel = document.getElementById( 'height-label' );
 const results = document.getElementById( 'results' );
 const imperial = document.getElementById( 'imperial' );
 const metric = document.getElementById( 'metric' );
@@ -24,17 +26,28 @@ function bmiMetric ( weight, height ) {
     return weight / ( height * height );
 }
 
-// Get input values and update the <div id="results">
-weight.addEventListener( 'input', inputValuesForBmiMath );
-height.addEventListener( 'input', inputValuesForBmiMath );
+function changeTextOfId ( htmlId, textString ) {
+    htmlId.innerHTML = textString;
+}
 
-function inputValuesForBmiMath () {
+// Get input values and update the <div id="results">
+weight.addEventListener( 'input', unitTypeChoice );
+height.addEventListener( 'input', unitTypeChoice );
+
+function inputValuesForBmiMathImperial () {
     let weightValue = weight.value;
     let heightValue = height.value;
     //results.innerHTML = bmiImperial( weightValue, heightValue );
     let bmiNumber =  bmiImperial( weightValue, heightValue );
     checkBmiCategory( bmiNumber );
     //return bmiNumber;
+}
+
+function inputValuesForBmiMathMetric () {
+    let weightValue = weight.value;
+    let heightValue = height.value;
+    let bmiNumber = bmiMetric( weightValue, heightValue );
+    checkBmiCategory( bmiNumber );
 }
 
 // Check for the correct category based on the BMI number
@@ -60,15 +73,22 @@ function checkBmiCategory ( bmiNumber ) {
     }
 }
 
-imperial.addEventListener( 'click', stuff );
-metric.addEventListener( 'click', stuff );
+// See if Imperial or Metric units should be used
+imperial.addEventListener( 'click', unitTypeChoice );
+metric.addEventListener( 'click', unitTypeChoice );
 
-function stuff () {
+function unitTypeChoice () {
     if ( imperial.checked === true ) {
         //imperial
-        alert( 'imperial' );
+        inputValuesForBmiMathImperial();
+        changeTextOfId( weightLabel, 'Weight in pounds' );
+        changeTextOfId( heightLabel, 'Height in inches' );
     } else if ( metric.checked === true ) {
         //metric
-        alert( 'metric' );
+        inputValuesForBmiMathMetric();
+        changeTextOfId( weightLabel, 'Weight in kilograms' );
+        changeTextOfId( heightLabel, 'Height in meters' );
+    } else {
+        //
     }
 }
